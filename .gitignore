@@ -1,0 +1,14 @@
+/.vscode
+/Library
+/Logs
+/obj
+/Packages
+/ProjectSEttings
+/Temp
+/UserSettings
+Adventure of Time.sln
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+AssetCleaner.csproj
+LoadingScreen.Misc.csproj
+Assets/UI/PSD/PSD.unitypackage
