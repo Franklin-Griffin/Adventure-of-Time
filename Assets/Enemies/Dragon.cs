@@ -15,10 +15,15 @@ public class Dragon : MonoBehaviour
     Animator anim;
     public LayerMask ground;
     public float dist = 2;
+    public int coinCount = 1;
+    Fire fire;
+    int flying = 1;
     void Start()
     {
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
+        fire = GetComponent<Fire>();
+        fire.tf = GetComponent<FOV>().head.transform;
     }
 
     public virtual void Update()
@@ -32,19 +37,21 @@ public class Dragon : MonoBehaviour
             {
                 //very close
                 anim.SetBool("Fly", true);
-                dist *= 2;
+                flying = 4;
                 anim.ResetTrigger("Attack1");
                 anim.ResetTrigger("Attack2");
                 anim.ResetTrigger("Attack3");
             }
-            else if (Vector3.Distance(transform.position, playerRef.position) > dist * 2 && anim.GetBool("Fly") == true)
+            else if (Vector3.Distance(transform.position, playerRef.position) > dist * 4 && anim.GetBool("Fly") == false)
             {
                 //very far
-                dist /= 2;
-                anim.SetBool("Fly", false);
+                anim.SetBool("Fly", true);
+                flying = 4;
+                anim.ResetTrigger("Attack1");
+                anim.ResetTrigger("Attack2");
                 anim.ResetTrigger("Attack3");
             }
-            if (Vector3.Distance(transform.position, playerRef.position) > dist)
+            if (Vector3.Distance(transform.position, playerRef.position) > dist * flying)
             {
                 //not within range
                 nav.SetDestination(Vector3.MoveTowards(playerRef.position, transform.position, dist));
@@ -61,6 +68,7 @@ public class Dragon : MonoBehaviour
                     {
                         //Fly attack
                         anim.SetTrigger("Attack3");
+                        fire.start();
                     }
                     else if (!anim.GetBool("Fly"))
                     {
@@ -85,6 +93,7 @@ public class Dragon : MonoBehaviour
                             anim.ResetTrigger("Attack2");
                             anim.ResetTrigger("Attack3");
                             anim.SetTrigger("Attack3");
+                            fire.start();
                         }
                     }
                 }
@@ -105,6 +114,8 @@ public class Dragon : MonoBehaviour
 
     public void Damage()
     {
+        fire.stop();
+        flying = 1;
         if (health <= 0)
             return;
         health--;
@@ -137,29 +148,34 @@ public class Dragon : MonoBehaviour
         anim.ResetTrigger("Damage");
         playerRef = null;
         nav.SetDestination(transform.position);
-
-        yield return new WaitForSeconds(0.5F);
+        yield return new WaitForSeconds(0.5f);
 
         do
         {
             yield return new WaitForEndOfFrame();
         } while (anim.GetCurrentAnimatorStateInfo(0).IsName("Death"));
 
-        if (deathFX) {
-            Quaternion rotation = transform.rotation;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            // Deactivate the child game object
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
 
-            //rotation.eulerAngles.y += 90;
+        if (deathFX)
+        {
+            Quaternion rotation = transform.rotation;
 
             Instantiate(deathFX, transform.position, Quaternion.identity);
         }
-        RaycastHit hit;
-        while (Physics.Raycast(transform.position, -transform.up, out hit, 1000, ground) == false)
+        for (int i = 0; i < coinCount; i++)
         {
-            transform.Translate(0, 1, 0);
-        }
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 1000, ground))
-        {
+            RaycastHit hit;
+            while (Physics.Raycast(transform.position, -transform.up, out hit, 1000, ground) == false)
+            {
+                transform.Translate(0, 1, 0);
+            }
             Instantiate(coins, hit.point, Quaternion.LookRotation(hit.normal)).transform.Rotate(new Vector3(90, 0, 0));
+            yield return new WaitForEndOfFrame();
         }
 
         DestroyImmediate(gameObject);

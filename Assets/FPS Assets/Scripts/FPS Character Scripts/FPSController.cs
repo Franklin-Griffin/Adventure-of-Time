@@ -64,6 +64,7 @@ public class FPSController : MonoBehaviour
     public Image healthPanel;
     public TextMeshProUGUI coins;
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI mantleText;
 
     private Color[] playerColors = new Color[] {new Color(0, 44, 255, 255),
         new Color(252, 208, 193, 255), new Color(0, 0, 0, 255)};
@@ -136,7 +137,7 @@ public class FPSController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Time.timeScale == 1f)
+            if (Time.timeScale != 0.1f)
                 Time.timeScale = 0.1f;
             else
                 Time.timeScale = 1f;
@@ -190,8 +191,6 @@ public class FPSController : MonoBehaviour
 
         if (is_Grounded)
         {
-
-            // HERE WE ARE GONNA CALL CROUCH AND SPRINT
             PlayerCrouchingAndSprinting();
 
             moveDirection = new Vector3(inputX * inputModifyFactor, -antiBumpFactor,
@@ -199,7 +198,6 @@ public class FPSController : MonoBehaviour
 
             moveDirection = transform.TransformDirection(moveDirection) * speed;
 
-            // HERE WE ARE GONNA CALL JUMP
             PlayerJump();
         }
 
@@ -289,14 +287,6 @@ public class FPSController : MonoBehaviour
             yield return null;
         }
     }
-    void OnTriggerStay(Collider other)
-    {
-        if (!is_Grounded && other.gameObject.layer == LayerMask.NameToLayer("Ground") && !mantled)
-        {
-            Debug.Log("Can Mantle");
-            PlayerJump();
-        }
-    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("EnemyWeapon"))
@@ -309,6 +299,22 @@ public class FPSController : MonoBehaviour
                 SceneManager.LoadScene(0);
             }
         }
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if (!is_Grounded && other.gameObject.layer == LayerMask.NameToLayer("Ground") && !mantled)
+        {
+            mantleText.text = "Mantle!";
+            PlayerJump();
+        }
+        else
+        {
+            mantleText.text = "";
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        mantleText.text = "";
     }
     void PlayerJump()
     {
@@ -389,7 +395,7 @@ public class FPSController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             quickFire = false;
-            fireRate = 1.5f;
+            fireRate = 2.5f;
 
             if (!handsWeapon_Manager.weapons[0].activeInHierarchy)
             {
@@ -422,7 +428,7 @@ public class FPSController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             quickFire = true;
-            fireRate = 2.5f;
+            fireRate = 5f;
 
             if (!handsWeapon_Manager.weapons[1].activeInHierarchy)
             {
@@ -455,7 +461,7 @@ public class FPSController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             quickFire = true;
-            fireRate = 1f;
+            fireRate = 0.5f;
 
             if (!handsWeapon_Manager.weapons[2].activeInHierarchy)
             {

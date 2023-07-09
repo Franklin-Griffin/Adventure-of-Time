@@ -8,4 +8,12 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Souleater
   m_Controller: {fileID: 9100000, guid: ea58a6e1c32f07742b3ee64fdce79555, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 9ad2ad510a1fd694392849b8dce337e3, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 5d9efb65c776b714fb5123711f07de0c, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 1420a40f7b2cd1341944b103718427f4, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 1420a40f7b2cd1341944b103718427f4, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 347d2e064d3a3f946b17655dcc998386, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 6f83b9d81f8c7854baeca6ff691bb0c1, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: f3c4af16992f14c43a050675b9be2f68, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 215d9268815c12d4389d713b8b1f8b12, type: 3}

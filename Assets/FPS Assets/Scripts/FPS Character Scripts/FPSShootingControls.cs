@@ -82,6 +82,10 @@ public class FPSShootingControls : MonoBehaviour
                         }
                     }
                 }
+                else if (hit.transform.tag == "Pinata")
+                {
+                    hit.transform.gameObject.transform.root.gameObject.GetComponent<Pinata>().Pop();
+                }
                 else
                 {
                     GameObject impact = Instantiate(wall_Impact, hit.point, Quaternion.LookRotation(hit.normal));

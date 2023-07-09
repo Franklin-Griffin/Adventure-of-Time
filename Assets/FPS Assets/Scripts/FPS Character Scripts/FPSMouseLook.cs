@@ -19,8 +19,8 @@ public class FPSMouseLook : MonoBehaviour
     private float minimum_X = -360f;
     private float maximum_X = 360f;
 
-    private float minimum_Y = -60f;
-    private float maximum_Y = 60f;
+    private float minimum_Y = -70f;
+    private float maximum_Y = 80f;
 
     private Quaternion originalRotation;
 
@@ -94,7 +94,7 @@ public class FPSMouseLook : MonoBehaviour
 
     }
 
-} // class
+}
 
 
 

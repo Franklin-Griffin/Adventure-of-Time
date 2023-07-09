@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     Animator anim;
     public LayerMask ground;
     public float dist = 2;
+    public int coinCount = 1;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -100,24 +101,34 @@ public class Enemy : MonoBehaviour
         anim.ResetTrigger("Damage");
         playerRef = null;
         nav.SetDestination(transform.position);
-
-        yield return new WaitForSeconds(0.5F);
+        yield return new WaitForSeconds(0.5f);
 
         do
         {
             yield return new WaitForEndOfFrame();
         } while (anim.GetCurrentAnimatorStateInfo(0).IsName("Death"));
 
-        Instantiate(deathFX, transform.position, transform.rotation);
-
-        RaycastHit hit;
-        while (Physics.Raycast(transform.position, -transform.up, out hit, 1000, ground) == false)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            transform.Translate(0, 1, 0);
+            // Deactivate the child game object
+            transform.GetChild(i).gameObject.SetActive(false);
         }
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 1000, ground))
+
+        if (deathFX)
         {
+            Quaternion rotation = transform.rotation;
+
+            Instantiate(deathFX, transform.position, Quaternion.identity);
+        }
+        for (int i = 0; i < coinCount; i++)
+        {
+            RaycastHit hit;
+            while (Physics.Raycast(transform.position, -transform.up, out hit, 1000, ground) == false)
+            {
+                transform.Translate(0, 1, 0);
+            }
             Instantiate(coins, hit.point, Quaternion.LookRotation(hit.normal)).transform.Rotate(new Vector3(90, 0, 0));
+            yield return new WaitForEndOfFrame();
         }
 
         DestroyImmediate(gameObject);

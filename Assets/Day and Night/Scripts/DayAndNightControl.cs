@@ -61,6 +61,7 @@ public class DayAndNightControl : MonoBehaviour
         {
             currentTime = 0;//once we hit "midnight"; any time after that sunrise will begin.
             currentDay++; //make the day counter go up
+            SecondsInAFullDay *= 0.9f;
         }
     }
 

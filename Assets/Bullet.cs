@@ -36,10 +36,12 @@ public class Bullet : MonoBehaviour
                 {
                     impact.transform.localScale *= 2;
                     Collider[] areaDmg = Physics.OverlapSphere(transform.position, 10000);
-                    foreach (Collider col in areaDmg) {
-                        if (col.tag == "Enemy") {
+                    foreach (Collider col in areaDmg)
+                    {
+                        if (col.tag == "Enemy")
+                        {
                             Transform c = col.transform.root;
-                            if (c.GetComponent<Enemy>()) 
+                            if (c.GetComponent<Enemy>())
                             {
                                 c.GetComponent<Enemy>().Damage();
                             }
@@ -60,10 +62,12 @@ public class Bullet : MonoBehaviour
                 {
                     impact.transform.localScale *= 2;
                     Collider[] areaDmg = Physics.OverlapSphere(transform.position, 10);
-                    foreach (Collider col in areaDmg) {
-                        if (col.tag == "Enemy") {
+                    foreach (Collider col in areaDmg)
+                    {
+                        if (col.tag == "Enemy")
+                        {
                             Transform c = col.transform.root;
-                            if (c.GetComponent<Enemy>()) 
+                            if (c.GetComponent<Enemy>())
                             {
                                 c.GetComponent<Enemy>().Damage();
                             }
@@ -75,10 +79,6 @@ public class Bullet : MonoBehaviour
                     }
                 }
             }
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.transform.tag == "Shield")
-        {
             Destroy(gameObject);
         }
         else
