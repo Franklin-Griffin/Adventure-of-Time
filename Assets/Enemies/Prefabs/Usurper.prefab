@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 485588, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.85
+      value: 1.39
       objectReference: {fileID: 0}
     - target: {fileID: 485588, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 485588, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -103.6
+      value: -90.24
       objectReference: {fileID: 0}
     - target: {fileID: 485588, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -147,5 +147,28 @@ PrefabInstance:
       propertyPath: deathFX
       value: 
       objectReference: {fileID: 100010, guid: a087aa2c7016d2042a3b744b2afc4fb0, type: 3}
+    - target: {fileID: 1920136573, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
+      propertyPath: coinCount
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
+--- !u!1 &1263124341887885570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 139696, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
+  m_PrefabInstance: {fileID: 1263124341888008370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1884483760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263124341887885570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d584b7b77e26e46a4e17a878804d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireBullet: {fileID: 100006, guid: 973eb0a45c837fd46993e1f277f5dacf, type: 3}
+  tf: {fileID: 0}

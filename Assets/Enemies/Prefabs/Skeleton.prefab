@@ -392,6 +392,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   dist: 2
+  coinCount: 3
 --- !u!195 &441163206
 NavMeshAgent:
   m_ObjectHideFlags: 0

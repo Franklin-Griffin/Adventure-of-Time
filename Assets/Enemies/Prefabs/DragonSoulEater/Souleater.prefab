@@ -1500,7 +1500,7 @@ GameObject:
   - component: {fileID: 434964153}
   - component: {fileID: 434964154}
   m_Layer: 0
-  m_Name: Grey
+  m_Name: Souleater
   m_TagString: Pinata
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1568,7 +1568,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coins: {fileID: 1498403948531744, guid: fa2c57d3f28a5e6419393e8bc3eeb32a, type: 3}
   deathFX: {fileID: 100004, guid: 96536afb634b32043bb988d4576053d3, type: 3}
-  coinCount: 10
+  coinCount: 100
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &176574
 GameObject:
   m_ObjectHideFlags: 0
